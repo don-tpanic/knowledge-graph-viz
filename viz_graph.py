@@ -13,39 +13,28 @@ def load_json_data(file_path):
 def create_knowledge_graph(data):
     G = nx.DiGraph()
     
-    # Create a mapping of node ids to their semantic groups and levels
-    node_to_group_n_level = {}
-    for group, nodes in data['semantic_groups']['experiment_1'].items():
-        for node in nodes:
-            node_to_group_n_level[node['id']] = f"{group},{node['level']}"
-    
-    # Add nodes with labels including semantic group
-    for node in data['knowledge_graph']['experiment_1']['nodes']:
-        group_n_level = node_to_group_n_level.get(node['id'], 'Unknown')
-        label = f"{node['label']} ({group_n_level})"
-        G.add_node(node['id'], label=label)
+    # Add nodes
+    for i, node in enumerate(data['nodes']):
+        G.add_node(i, label=node['label'])
     
     # Add edges
-    for edge in data['knowledge_graph']['experiment_1']['edges']:
-        G.add_edge(edge['source'], edge['target'], relation=edge['relation'])
+    node_labels = [node['label'] for node in data['nodes']]
+    for edge in data['edges']:
+        source_idx = node_labels.index(edge['source'])
+        target_idx = node_labels.index(edge['target'])
+        G.add_edge(source_idx, target_idx, relation=edge['label'])
     
     return G
 
 def generate_colors(n):
     HSV_tuples = [(x * 1.0 / n, 0.5, 0.5) for x in range(n)]
-    return [colorsys.hsv_to_rgb(*x) for x in HSV_tuples]
+    rgb_colors = [colorsys.hsv_to_rgb(*x) for x in HSV_tuples]
+    return [(int(r*255), int(g*255), int(b*255)) for r, g, b in rgb_colors]
 
 def get_node_colors(data):
-    semantic_groups = data['semantic_groups']['experiment_1']
-    group_names = list(semantic_groups.keys())
-    colors = generate_colors(len(group_names))
-    
-    color_map = {}
-    for i, group in enumerate(group_names):
-        for node in semantic_groups[group]:
-            color_map[node['id']] = colors[i]
-    
-    return color_map
+    n_nodes = len(data['nodes'])
+    colors = generate_colors(n_nodes)
+    return {i: colors[i] for i in range(n_nodes)}
 
 def plot_interactive_graph(G, data):
     pygame.init()
@@ -109,7 +98,7 @@ def plot_interactive_graph(G, data):
         
         for node in G.nodes():
             node_pos = (pos[node][0] + offset_x, pos[node][1] + offset_y)
-            color = tuple(int(x * 255) for x in color_map.get(node, (0.5, 0.5, 0.5)))
+            color = color_map.get(node, (128, 128, 128))
             pygame.draw.circle(screen, color, node_pos, 30)
             lines = wrap_text(G.nodes[node]['label'], node_font, 200)
             for i, line in enumerate(lines):

@@ -11,5 +11,5 @@ e.g.,
 * Visualize an altered knowledge graph of a paper: `python viz_graph.py -p <doi> -pe -pi <index-of-the-permutation>`
 e.g., 
   ```
-  python viz_graph.py -p 10.1016:j.cognition.2020.104244 -pe -pi 2
+  python viz_graph.py -p 10.1016:j.cognition.2020.104244 -pe -pi 1
   ```

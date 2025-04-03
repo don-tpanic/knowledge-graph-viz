@@ -62,7 +62,7 @@
         {
             "source": "Participant",
             "target": "Chosen-Unique Pattern",
-            "label": "prefers most"
+            "label": "prefers least"
         },
         {
             "source": "Participant",
@@ -72,11 +72,11 @@
         {
             "source": "Participant",
             "target": "Non-Chosen Pattern",
-            "label": "prefers least"
+            "label": "prefers most"
         },
         {
             "source": "Chosen-Unique Pattern",
-            "target": "Preferred Most",
+            "target": "Preferred Least",
             "label": "ranked as"
         },
         {
@@ -86,7 +86,7 @@
         },
         {
             "source": "Non-Chosen Pattern",
-            "target": "Preferred Least",
+            "target": "Preferred Most",
             "label": "ranked as"
         }
     ]
