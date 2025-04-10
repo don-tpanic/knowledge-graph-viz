@@ -10,7 +10,7 @@
   pip install -r requirements.txt
   ```
 
-* Place a paper's knowledge graph as `papers/<doi>_original.json` (for original KG) and `papers/<doi>_perm_<index>.json` (for permuted KG).
+* Place a paper's knowledge graph as `papers/<doi>/kg_original.json` (for original KG) and `papers/<doi>/kg_perm_<index>.json` (for permuted KG).
 
 * Visualize the original knowledge graph of a paper: `python viz_graph.py -p <doi> -o`
 e.g.,

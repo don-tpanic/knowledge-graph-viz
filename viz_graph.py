@@ -173,9 +173,9 @@ def main():
     args = parser.parse_args()
 
     if args.original:
-        json_fpath = os.path.join("papers", f"{args.paper_doi}_original.json")
+        json_fpath = os.path.join(f"papers/{args.paper_doi}", "kg_original.json")
     else:
-        json_fpath = os.path.join("papers", f"{args.paper_doi}_perm_{args.perm_index}.json")
+        json_fpath = os.path.join(f"papers/{args.paper_doi}", f"kg_perm_{args.perm_index}.json")
     if not os.path.exists(json_fpath):
         raise FileNotFoundError(f"File {json_fpath} does not exist.")
     
