@@ -10,16 +10,16 @@
   pip install -r requirements.txt
   ```
 
-* Place a paper's knowledge graph as `papers/<doi>/kg_original.json` (for original KG) and `papers/<doi>/kg_perm_<index>.json` (for permuted KG).
+* Place a paper's knowledge graph as `papers/<doi>/label_<uid>_kg_original.json` (for original KG) and `papers/<doi>/label_<uid>_kg_perm_<index>.json` (for permuted KG). You should use `<uid>` to identify your work because others might also work on this paper and create different KGs.
 
-* Visualize the original knowledge graph of a paper: `python viz_graph.py -p <doi> -o`
+* Visualize the original knowledge graph of a paper: `python viz_graph.py -p <doi> -u <uid> -o`
 e.g.,
   ```
-  python viz_graph.py -p 10.1016:j.cognition.2020.104244 -o
+  python viz_graph.py -p 10.1016:j.cognition.2020.104244 -u ken_c137 -o
   ```
 
-* Visualize an altered knowledge graph of a paper: `python viz_graph.py -p <doi> -pe -pi <index-of-the-permutation>`
+* Visualize an altered knowledge graph of a paper: `python viz_graph.py -p <doi> -u <uid> -pe -pi <index-of-the-permutation>`
 e.g., 
   ```
-  python viz_graph.py -p 10.1016:j.cognition.2020.104244 -pe -pi 1
+  python viz_graph.py -p 10.1016:j.cognition.2020.104244 -u ken_c137 -pe -pi 1
   ```
